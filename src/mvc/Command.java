@@ -7,7 +7,10 @@ Version 0
 package mvc;
 
 public class Command {
-    Model model;
+    protected Model model;
+    public Command(Model model){
+        this.model = model;
+    }
     public void execute() {
 
     }

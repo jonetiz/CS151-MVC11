@@ -7,11 +7,11 @@ Version 0
 package mvc;
 
 public interface AppFactory {
-    Model makeModel();
-    View makeView();
-    String getTitle();
-    String[] getHelp();
-    String about();
-    String[] getEditCommands();
-    Command makeEditCommand(String name);
+    abstract Model makeModel();
+    abstract View makeView(Model model);
+    abstract String getTitle();
+    abstract String[] getHelp();
+    abstract String about();
+    abstract String[] getEditCommands();
+    abstract Command makeEditCommand(Model model, String type, Object source);
 }
