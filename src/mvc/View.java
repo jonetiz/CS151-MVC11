@@ -6,9 +6,6 @@ Version 0
 
 package mvc;
 
-import stopLight.StopLightShape;
-import stopLight.Stoplight;
-
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
