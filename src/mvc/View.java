@@ -21,7 +21,14 @@ public class View extends JPanel implements Subscriber {
         setBackground(Color.LIGHT_GRAY);
     }
     public void update() {
+        repaint();
+    }
 
+    public void setModel(Model model){
+        this.model.unsubscribe(this);
+        this.model = model;
+        model.subscribe(this);
+        repaint();
     }
 
     public void paintComponent(Graphics gc) {
