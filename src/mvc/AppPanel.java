@@ -51,7 +51,6 @@ public class AppPanel extends JPanel implements ActionListener {
         JMenu helpMenu = Utilities.makeMenu("Help", new String[]{"About", "Help"}, this);
         result.add(helpMenu);
 
-
         return result;
     }
 
@@ -65,50 +64,32 @@ public class AppPanel extends JPanel implements ActionListener {
         try {
             switch (cmmd) {
                 case "Save": {
-                    String fName = Utilities.getFileName((String) null, false);
-                    ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(fName));
-                    os.writeObject(this.model);
-                    os.close();
+                    Utilities.save(model, true);
                     break;
                 }
-
                 case "Open": {
-
-                    if (Utilities.confirm("Are you sure? Unsaved changes will be lost!")) {
-                        String fName = Utilities.getFileName((String) null, true);
-                        ObjectInputStream is = new ObjectInputStream(new FileInputStream(fName));
-                        model = (Model) is.readObject();
-                        view.setModel(model);
-                        is.close();
-                    }
-
+                    Utilities.open(model);
                     break;
 
                 }
-
                 case "New": {
-                    //NOT WOKRING AS INTENDED
                     model = factory.makeModel();
                     view.setModel(model);
                     break;
                 }
-
                 case "Quit": {
                     System.exit(0);
                     break;
                 }
-
                 case "About": {
                     Utilities.inform(factory.about());
                     break;
                 }
-
                 case "Help": {
                     Utilities.inform(factory.getHelp());
                     break;
 
                 }
-
                 default: {
                     factory.makeEditCommand(model, cmmd, this).execute();
                 }
@@ -118,7 +99,7 @@ public class AppPanel extends JPanel implements ActionListener {
         }
     }
 
-    class ControlPanel extends JPanel {
+    protected class ControlPanel extends JPanel {
         public ControlPanel() {
 
         }

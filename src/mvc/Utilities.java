@@ -75,7 +75,7 @@ public class Utilities {
         } else {
             int returnVal = chooser.showSaveDialog(null);
             if(returnVal == JFileChooser.APPROVE_OPTION) {
-                result= chooser.getSelectedFile().getPath();
+                result = chooser.getSelectedFile().getPath();
             }
         }
         return result;
@@ -84,6 +84,7 @@ public class Utilities {
     // save model
     public static void save(Model model, Boolean saveAs) {
         String fName = model.getFileName();
+        System.out.println(fName);
         if (fName == null || saveAs) {
             fName = getFileName(fName, false);
             model.setFileName(fName);
