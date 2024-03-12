@@ -1,12 +1,7 @@
-/*
-Jonathan Etiz & Luan Nguyen
-Utilities.java
-Version 0
- */
-
 package mvc;
 
 import java.awt.event.*;
+import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.Random;
 import javax.swing.*;
@@ -33,8 +28,8 @@ public class Utilities {
     // tells user a lot of info
     public static void inform(String[] items) {
         String helpString = "";
-        for (String item : items) {
-            helpString = helpString + "\n" + item;
+        for(int i = 0; i < items.length; i++) {
+            helpString = helpString + "\n" + items[i];
         }
         inform(helpString);
     }
@@ -58,8 +53,10 @@ public class Utilities {
 
     // asks user to save changes
     public static void saveChanges(Model model) {
-        if (model.getUnsavedChanges() && Utilities.confirm("current model has unsaved changes, continue?"))
+        if (model.getUnsavedChanges() &&
+                !Utilities.confirm("current model has unsaved changes, continue?")) {
             Utilities.save(model, false);
+        }
     }
 
     // asks user for a file name
@@ -78,7 +75,7 @@ public class Utilities {
         } else {
             int returnVal = chooser.showSaveDialog(null);
             if(returnVal == JFileChooser.APPROVE_OPTION) {
-                result= chooser.getSelectedFile().getPath();
+                result = chooser.getSelectedFile().getPath();
             }
         }
         return result;
@@ -87,6 +84,7 @@ public class Utilities {
     // save model
     public static void save(Model model, Boolean saveAs) {
         String fName = model.getFileName();
+        System.out.println(fName);
         if (fName == null || saveAs) {
             fName = getFileName(fName, false);
             model.setFileName(fName);
@@ -120,8 +118,8 @@ public class Utilities {
     // simple menu maker
     public static JMenu makeMenu(String name, String[] items, ActionListener handler) {
         JMenu result = new JMenu(name);
-        for (String s : items) {
-            JMenuItem item = new JMenuItem(s);
+        for(int i = 0; i < items.length; i++) {
+            JMenuItem item = new JMenuItem(items[i]);
             item.addActionListener(handler);
             result.add(item);
         }

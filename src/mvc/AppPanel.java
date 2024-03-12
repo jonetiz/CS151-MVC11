@@ -10,6 +10,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 public class AppPanel extends JPanel implements ActionListener {
     protected View view;
@@ -39,7 +43,14 @@ public class AppPanel extends JPanel implements ActionListener {
 
     protected JMenuBar createMenuBar() {
         JMenuBar result = new JMenuBar();
-        //NEED WORK HERE
+
+        JMenu fileMenu = Utilities.makeMenu("File", new String[]{"New", "Save", "Open", "Quit"}, this);
+        result.add(fileMenu);
+        JMenu editMenu = Utilities.makeMenu("Edit", factory.getEditCommands(), this);
+        result.add(editMenu);
+        JMenu helpMenu = Utilities.makeMenu("Help", new String[]{"About", "Help"}, this);
+        result.add(helpMenu);
+
         return result;
     }
 
@@ -48,9 +59,47 @@ public class AppPanel extends JPanel implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
+        String cmmd = e.getActionCommand();
+        System.out.println(cmmd);
+        try {
+            switch (cmmd) {
+                case "Save": {
+                    Utilities.save(model, true);
+                    break;
+                }
+                case "Open": {
+                    Utilities.open(model);
+                    break;
+
+                }
+                case "New": {
+                    model = factory.makeModel();
+                    view.setModel(model);
+                    break;
+                }
+                case "Quit": {
+                    System.exit(0);
+                    break;
+                }
+                case "About": {
+                    Utilities.inform(factory.about());
+                    break;
+                }
+                case "Help": {
+                    Utilities.inform(factory.getHelp());
+                    break;
+
+                }
+                default: {
+                    factory.makeEditCommand(model, cmmd, this).execute();
+                }
+            }
+        } catch (Exception ex) {
+            Utilities.error(ex);
+        }
     }
 
-    public class ControlPanel extends JPanel {
+    protected class ControlPanel extends JPanel {
         public ControlPanel() {
 
         }

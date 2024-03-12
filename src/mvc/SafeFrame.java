@@ -8,10 +8,10 @@ package mvc;
 
 import javax.swing.*;
 import java.awt.event.WindowEvent;
-
 public class SafeFrame extends JFrame {
 
     protected void processWindowEvent(WindowEvent ev) {
+        System.out.println("window closed");
         super.processWindowEvent(ev);
         if(ev.getID() == WindowEvent.WINDOW_CLOSING) {
             if (Utilities.confirm("Are you sure? Unsaved changes will be lost!")) {
