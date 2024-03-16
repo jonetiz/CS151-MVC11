@@ -2,7 +2,6 @@ package CALab;
 
 import mvc.Command;
 import mvc.Model;
-import stopLight.Stoplight;
 
 public class ClearCommand extends Command {
     public ClearCommand(Model model) {
