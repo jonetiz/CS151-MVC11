@@ -25,23 +25,12 @@ public class GridFactory implements AppFactory {
     }
 
     public Command makeEditCommand(Model model, String type, Object source) {
-        switch (type) {
-            case "Run1": {
-                return new RunCommand(model, 1);
-            }
-            case "Run50": {
-                return new RunCommand(model, 50);
-
-            }
-            case "Populate": {
-                return new PopulateCommand(model);
-            }
-            case "Clear": {
-                return new ClearCommand(model);
-            }
-            default: {
-                return null;
-            }
-        }
+        return switch (type) {
+            case "Run1" -> new RunCommand(model, 1);
+            case "Run50" -> new RunCommand(model, 50);
+            case "Populate" -> new PopulateCommand(model);
+            case "Clear" -> new ClearCommand(model);
+            default -> null;
+        };
     }
 }
