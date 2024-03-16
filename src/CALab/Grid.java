@@ -120,12 +120,12 @@ public abstract class Grid extends Model {
     public void observe() {
         // call each cell's observe method and notify subscribers
         for(int row = 0; row < cells.length; row++) {
-            for (int col = 0; col < cells[row].length; col++) {
-                Cell cell = getCell(row, col);
+            for (Cell cell : cells[row]) {
                 cell.observe();
                 cell.notifySubscribers();
             }
         }
+        notifySubscribers();
     }
 
     public void interact() {
