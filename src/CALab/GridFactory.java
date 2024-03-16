@@ -1,14 +1,9 @@
 package CALab;
 
-import mvc.AppFactory;
-import mvc.Command;
-import mvc.Model;
-import mvc.View;
+import mvc.*;
 
 public class GridFactory implements AppFactory {
-    public Model makeModel() {
-        return null;
-    }
+    public Model makeModel() {return null;}
 
     public View makeView(Model model) {
         return new GridView(model);
@@ -25,10 +20,16 @@ public class GridFactory implements AppFactory {
     }
 
     public String[] getEditCommands() {
-        return new String[0];
+        return new String[] {"Run1", "Run50", "Populate", "Clear"};
     }
 
     public Command makeEditCommand(Model model, String type, Object source) {
-        return null;
+        return switch (type) {
+            case "Run1" -> new RunCommand(model, 1);
+            case "Run50" -> new RunCommand(model, 50);
+            case "Populate" -> new PopulateCommand(model);
+            case "Clear" -> new ClearCommand(model);
+            default -> null;
+        };
     }
 }

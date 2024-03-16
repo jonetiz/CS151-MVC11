@@ -39,16 +39,31 @@ public abstract class Grid extends Model {
     protected void populate() {
         // 1. use makeCell to fill in cells
         // 2. use getNeighbors to set the neighbors field of each cell
+        makeCell(true);
+        for(int row = 0; row < dim; row++){
+            for(int col = 0; col < dim; col++){
+                Cell cell = getCell(row,col);
+                cell.neighbors = getNeighbors(cell, 1);
+            }
+        }
+
     }
 
     // called when Populate and clear buttons are clicked
     public void repopulate(boolean randomly) {
-        if (randomly) {
-            // randomly set the status of each cell
-        } else {
-            // set the status of each cell to 0 (dead)
+//        if (randomly) {
+//            // randomly set the status of each cell
+//        } else {
+//            // set the status of each cell to 0 (dead), i.e. initial value
+//        }
+        for(int row = 0; row < cells.length; row++) {
+            for (int col = 0; col < cells[row].length; col++) {
+                Cell cell = getCell(row, col);
+                cell.reset(randomly);
+            }
         }
         // notify subscribers
+        notifySubscribers();
     }
 
 
@@ -61,16 +76,39 @@ public abstract class Grid extends Model {
         */
 
         // if the radius is 1 we just need the neighbors
-        if (radius == 1) return asker.neighbors;
-
-
+        //if (radius == 1) return asker.neighbors;
         // this will be returned
         Set<Cell> set = new HashSet<>();
-
-
         // recursively add all neighbors to set
-        for (Cell neighbor : asker.neighbors) {
-            set.addAll(getNeighbors(neighbor, radius - 1));
+        //for (Cell neighbor : asker.neighbors) {
+            //set.addAll(getNeighbors(neighbor, radius - 1));
+        //}
+        /*
+                +---+---+---+
+                | 1 | 2 | 3 |
+                +---+---+---+
+                | 5 | 6 | 7 |
+                +---+---+---+
+                | 9 |10 |11 |
+                +---+---+---+
+        */
+        int askerRow = asker.row;
+        int askerCol = asker.col;
+
+        //starting topleft, ending bottonright
+        int row = askerRow-radius;//starting row
+        int col = askerCol-radius;//starting col
+
+        while(row <= askerRow+radius){//ending row
+            while(col <= askerCol+radius){//ending col
+
+                Cell cell = getCell(row%dim,col%dim);
+                if(cell.equals(asker)) continue;
+                set.add(cell);
+
+                col++;
+            }
+            row++;
         }
 
         return set;
@@ -81,14 +119,33 @@ public abstract class Grid extends Model {
 
     public void observe() {
         // call each cell's observe method and notify subscribers
+        for(int row = 0; row < cells.length; row++) {
+            for (Cell cell : cells[row]) {
+                cell.observe();
+                cell.notifySubscribers();
+            }
+        }
+        notifySubscribers();
     }
 
     public void interact() {
-        // ???
+        for(int row = 0; row < cells.length; row++) {
+            for (Cell cell : cells[row]) {
+                cell.interact();
+                cell.notifySubscribers();
+            }
+        }
+        notifySubscribers();
     }
 
     public void update() {
-        // ???
+        for(int row = 0; row < cells.length; row++) {
+            for (Cell cell : cells[row]) {
+                cell.update();
+                cell.notifySubscribers();
+            }
+        }
+        notifySubscribers();
     }
 
     public void updateLoop(int cycles) {
