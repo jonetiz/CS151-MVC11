@@ -12,7 +12,7 @@ public class GridPanel extends AppPanel {
     private JButton run50;
     private JButton populate;
     private JButton clear;
-    public GridPanel(AppFactory factory) {
+    public GridPanel(GridFactory factory) {
         super(factory);
         run1 = new JButton("Run1");
         run1.addActionListener(this);
