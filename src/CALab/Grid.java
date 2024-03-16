@@ -130,12 +130,12 @@ public abstract class Grid extends Model {
 
     public void interact() {
         for(int row = 0; row < cells.length; row++) {
-            for (int col = 0; col < cells[row].length; col++) {
-                Cell cell = getCell(row, col);
+            for (Cell cell : cells[row]) {
                 cell.interact();
                 cell.notifySubscribers();
             }
         }
+        notifySubscribers();
     }
 
     public void update() {
