@@ -1,7 +1,6 @@
 package CALab;
 
 import mvc.*;
-import stopLight.ChangeCommand;
 
 public class GridFactory implements AppFactory {
     public Model makeModel() {return null;}
