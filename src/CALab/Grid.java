@@ -102,7 +102,9 @@ public abstract class Grid extends Model {
         while(row <= askerRow+radius){//ending row
             while(col <= askerCol+radius){//ending col
 
-                set.add(getCell(row%20,col%20));
+                Cell cell = getCell(row%dim,col%dim);
+                if(cell.equals(asker)) continue;
+                set.add(cell);
 
                 col++;
             }
