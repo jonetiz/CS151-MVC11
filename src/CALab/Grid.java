@@ -41,7 +41,7 @@ public abstract class Grid extends Model {
         // 2. use getNeighbors to set the neighbors field of each cell
         makeCell(true);
         for(int row = 0; row < cells.length; row++){
-            for(int col = 0; col < cells[row].length; col++){
+            for(int col = 0; col < dim; col++){
                 Cell cell = getCell(row,col);
                 cell.neighbors = getNeighbors(cell, 1);
             }
