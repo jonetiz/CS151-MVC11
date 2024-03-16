@@ -51,6 +51,7 @@ public class AppPanel extends JPanel implements ActionListener {
         JMenu helpMenu = Utilities.makeMenu("Help", new String[]{"About", "Help"}, this);
         result.add(helpMenu);
 
+
         return result;
     }
 
@@ -67,29 +68,35 @@ public class AppPanel extends JPanel implements ActionListener {
                     Utilities.save(model, true);
                     break;
                 }
+
                 case "Open": {
                     Utilities.open(model);
                     break;
 
                 }
+
                 case "New": {
                     model = factory.makeModel();
                     view.setModel(model);
                     break;
                 }
+
                 case "Quit": {
                     System.exit(0);
                     break;
                 }
+
                 case "About": {
                     Utilities.inform(factory.about());
                     break;
                 }
+
                 case "Help": {
                     Utilities.inform(factory.getHelp());
                     break;
 
                 }
+
                 default: {
                     factory.makeEditCommand(model, cmmd, this).execute();
                 }
