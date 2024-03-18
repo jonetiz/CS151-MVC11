@@ -23,7 +23,7 @@ public class Agent extends Cell {
         //  A living cell dies if it has too few or too many living neighbors (ambience = 0, 1, 4, 5, 6, 7, 8),
         //  and a dead cell comes back to life it has 3 living neighbors
         if (status == 0) { // if it's dead
-            if (ambience >= 3) {
+            if (ambience == 3) {
                 status = 1; // bring back to life when it has 3 living neighbors
             }
         } else {
