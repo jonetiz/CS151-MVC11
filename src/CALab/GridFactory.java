@@ -3,7 +3,11 @@ package CALab;
 import mvc.*;
 
 public class GridFactory implements AppFactory {
-    public Model makeModel() { return null; }
+    public Model makeModel() { return new Grid() {
+        public Cell makeCell(boolean uniform) {
+            return null;
+        }
+    }; }
 
     public View makeView(Model model) {
         return new GridView(model);
@@ -12,7 +16,10 @@ public class GridFactory implements AppFactory {
     public String getTitle() { return "CALab"; }
 
     public String[] getHelp() {
-        return new String[0];
+        return new String[]{"RUN1: calls grid.updateLoop(1)\n" +
+                "RUN50: calls grid.updateLoop(50)\n" +
+                "POPULATE: calls grid.repopulate() which sets the state of each cell to a random value\n" +
+                "CLEAR: calls grid.clear() which sets the state of each cell to an initial value."};
     }
 
     public String about() {
