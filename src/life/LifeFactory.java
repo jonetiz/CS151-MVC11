@@ -6,7 +6,7 @@ import mvc.*;
 public class LifeFactory extends GridFactory {
     public Model makeModel() { return new Society(); }
 
-    public View makeView(Model model) {
+    public View makeView(Society model) {
         return new LifeView(model);
     }
 

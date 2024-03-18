@@ -10,16 +10,17 @@ public class GridFactory implements AppFactory {
     }; }
 
     public View makeView(Model model) {
-        return new GridView(model);
+        return new GridView((Grid) model);
     }
 
     public String getTitle() { return "CALab"; }
 
     public String[] getHelp() {
-        return new String[]{"RUN1: calls grid.updateLoop(1)\n" +
-                "RUN50: calls grid.updateLoop(50)\n" +
-                "POPULATE: calls grid.repopulate() which sets the state of each cell to a random value\n" +
-                "CLEAR: calls grid.clear() which sets the state of each cell to an initial value."};
+        return new String[]{"""
+RUN1: calls grid.updateLoop(1)
+RUN50: calls grid.updateLoop(50)
+POPULATE: calls grid.repopulate() which sets the state of each cell to a random value
+CLEAR: calls grid.clear() which sets the state of each cell to an initial value."""};
     }
 
     public String about() {
