@@ -1,6 +1,5 @@
 package CALab;
 
-import mvc.AppFactory;
 import mvc.AppPanel;
 
 import javax.swing.*;
@@ -12,6 +11,7 @@ public class GridPanel extends AppPanel {
     private JButton clear;
     public GridPanel(GridFactory factory) {
         super(factory);
+
         run1 = new JButton("Run1");
         run1.addActionListener(this);
         run50 = new JButton("Run50");
@@ -27,4 +27,9 @@ public class GridPanel extends AppPanel {
         controlPanel.add(clear);
     }
 
+    public static void main(String[] args) {
+        GridFactory factory = new GridFactory();
+        GridPanel panel = new GridPanel(factory);
+        panel.display();
+    }
 }

@@ -1,10 +1,6 @@
 package CALab;
 
-import javax.swing.*;
-
 import mvc.*;
-
-import java.awt.*;
 
 public class GridView extends View {
 
@@ -30,6 +26,11 @@ public class GridView extends View {
 
     public void update() {
         // call update method of each CellView
+        for (CellView[] row : cellViews) {
+            for (CellView cv : row) {
+                cv.update();
+            }
+        }
     }
 
 }

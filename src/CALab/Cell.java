@@ -23,6 +23,13 @@ public abstract class Cell extends Publisher implements Serializable {
 			Starting at a random position in the array search for a neighbor without a partner
 			Make the first such neighbor (if any) the partner and set its partner field to this
 			*/
+            for (Cell neighbor : neighbors) {
+                if (neighbor.partner == null) {
+                    neighbor.partner = this;
+                    partner = neighbor;
+                    break;
+                }
+            }
         }
 
     }

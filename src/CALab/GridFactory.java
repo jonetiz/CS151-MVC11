@@ -3,7 +3,11 @@ package CALab;
 import mvc.*;
 
 public class GridFactory implements AppFactory {
-    public Model makeModel() {return null;}
+    public Model makeModel() { return new Grid() {
+        public Cell makeCell(boolean uniform) {
+            return null;
+        }
+    }; }
 
     public View makeView(Model model) {
         return new GridView(model);
