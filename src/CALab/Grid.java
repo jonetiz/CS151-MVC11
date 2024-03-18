@@ -1,6 +1,8 @@
 package CALab;
 
+import java.awt.*;
 import java.util.*;
+import java.io.*;
 
 import mvc.*;
 
@@ -54,8 +56,9 @@ public abstract class Grid extends Model {
 //        } else {
 //            // set the status of each cell to 0 (dead), i.e. initial value
 //        }
-        for (Cell[] row : cells) {
-            for (Cell cell : row) {
+        for(int row = 0; row < cells.length; row++) {
+            for (int col = 0; col < cells[row].length; col++) {
+                Cell cell = getCell(row, col);
                 cell.reset(randomly);
             }
         }
@@ -98,12 +101,12 @@ public abstract class Grid extends Model {
 
         while(row <= askerRow+radius){//ending row
             while(col <= askerCol+radius){//ending col
-
-                Cell cell = getCell(row%dim,col%dim);
+                int r = (int) (row - dim*(Math.floor((double) row /(double)dim)));
+                int c = (int) (col - dim*(Math.floor((double) col /(double)dim)));
+                Cell cell = getCell(r,c);
+                col++;//increment col before the check
                 if(cell.equals(asker)) continue;
                 set.add(cell);
-
-                col++;
             }
             row++;
         }
@@ -116,8 +119,8 @@ public abstract class Grid extends Model {
 
     public void observe() {
         // call each cell's observe method and notify subscribers
-        for (Cell[] row : cells) {
-            for (Cell cell : row) {
+        for(int row = 0; row < cells.length; row++) {
+            for (Cell cell : cells[row]) {
                 cell.observe();
                 cell.notifySubscribers();
             }
@@ -126,8 +129,8 @@ public abstract class Grid extends Model {
     }
 
     public void interact() {
-        for (Cell[] row : cells) {
-            for (Cell cell : row) {
+        for(int row = 0; row < cells.length; row++) {
+            for (Cell cell : cells[row]) {
                 cell.interact();
                 cell.notifySubscribers();
             }
@@ -136,8 +139,8 @@ public abstract class Grid extends Model {
     }
 
     public void update() {
-        for (Cell[] row : cells) {
-            for (Cell cell : row) {
+        for(int row = 0; row < cells.length; row++) {
+            for (Cell cell : cells[row]) {
                 cell.update();
                 cell.notifySubscribers();
             }
