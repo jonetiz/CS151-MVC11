@@ -25,6 +25,7 @@ public class Society extends Grid {
         for(int row = 0; row < dim; row++){
             for(int col = 0; col < dim; col++){
                 Cell cell = new Agent(this, row, col);
+                cells[row][col] = cell;
             }
         }
         return null;

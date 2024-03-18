@@ -38,9 +38,8 @@ public abstract class Grid extends Model {
         // 1. use makeCell to fill in cells
         // 2. use getNeighbors to set the neighbors field of each cell
         makeCell(true);
-        for(int row = 0; row < dim; row++){
-            for(int col = 0; col < dim; col++){
-                Cell cell = getCell(row,col);
+        for(Cell[] row : cells){
+            for(Cell cell : row){
                 cell.neighbors = getNeighbors(cell, 1);
             }
         }
@@ -96,10 +95,13 @@ public abstract class Grid extends Model {
         int row = askerRow-radius;//starting row
         int col = askerCol-radius;//starting col
 
+        if (row < 0) row = 0;
+        if (col < 0) col = 0;
+
         while(row <= askerRow+radius){//ending row
             while(col <= askerCol+radius){//ending col
 
-                Cell cell = getCell(row%dim,col%dim);
+                Cell cell = getCell(row%dim, col%dim);
                 if(cell.equals(asker)) continue;
                 set.add(cell);
 

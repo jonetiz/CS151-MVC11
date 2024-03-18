@@ -26,10 +26,4 @@ public class GridPanel extends AppPanel {
         controlPanel.add(populate);
         controlPanel.add(clear);
     }
-
-    public static void main(String[] args) {
-        GridFactory factory = new GridFactory();
-        GridPanel panel = new GridPanel(factory);
-        panel.display();
-    }
 }
