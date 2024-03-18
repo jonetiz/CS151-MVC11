@@ -18,11 +18,14 @@ public class GridView extends View {
         int dim = model.getDim();
         cellViews = new CellView[dim][dim]; // create a dim x dim array
 
+        model.subscribe(this);
+
         for (int row = 0; row < dim; row++) {
             for (int col = 0; col < dim; col++) {
                 CellView cellView = new CellView((model).getCell(row, col));
                 cellViews[row][col] = cellView;
                 this.add(cellView);
+                cellView.update();
             }
         }
         this.setLayout(new GridLayout(dim, dim, 0, 0));
@@ -33,6 +36,7 @@ public class GridView extends View {
         for (CellView[] row : cellViews) {
             for (CellView cv : row) {
                 cv.update();
+                cv.myCell.observe();
             }
         }
     }

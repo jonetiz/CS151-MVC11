@@ -18,14 +18,10 @@ public class CellView extends JButton implements ActionListener, Subscriber {
         this.addActionListener(this);
     }
 
-    public CellView() {
-        this(null);
-    }
-
     public void actionPerformed(ActionEvent e) {
         myCell.nextState();
         // call update needed?
-        myCell.update();
+        update();
     }
 
     // called by notifySubscribers and GridView.update

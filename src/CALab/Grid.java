@@ -6,7 +6,7 @@ import mvc.*;
 
 public abstract class Grid extends Model {
     static private int time = 0;
-    protected int dim = 20;
+    protected int dim;
     protected Cell[][] cells;
 
     public int getDim() {
@@ -43,7 +43,6 @@ public abstract class Grid extends Model {
                 cell.neighbors = getNeighbors(cell, 1);
             }
         }
-
     }
 
     // called when Populate and clear buttons are clicked
@@ -56,6 +55,18 @@ public abstract class Grid extends Model {
         for (Cell[] row : cells) {
             for (Cell cell : row) {
                 cell.reset(randomly);
+            }
+        }
+
+        // notify subscribers
+        notifySubscribers();
+    }
+
+    public void clear() {
+        // set all back to default state
+        for (Cell[] row : cells) {
+            for (Cell cell : row) {
+                cell.reset(false);
             }
         }
         // notify subscribers
