@@ -10,10 +10,10 @@ public class LifeFactory extends GridFactory {
         return new LifeView(model);
     }
 
-    public String getTitle() { return "Life"; }
+    public String getTitle() { return "CALab"; }
 
     public String[] getHelp() {
-        return super.getHelp();
+        return new String[0];
     }
 
     public String about() {

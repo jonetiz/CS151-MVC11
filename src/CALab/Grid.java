@@ -1,8 +1,6 @@
 package CALab;
 
-import java.awt.*;
 import java.util.*;
-import java.io.*;
 
 import mvc.*;
 
@@ -40,9 +38,8 @@ public abstract class Grid extends Model {
         // 1. use makeCell to fill in cells
         // 2. use getNeighbors to set the neighbors field of each cell
         makeCell(true);
-        for(int row = 0; row < dim; row++){
-            for(int col = 0; col < dim; col++){
-                Cell cell = getCell(row,col);
+        for(Cell[] row : cells){
+            for(Cell cell : row){
                 cell.neighbors = getNeighbors(cell, 1);
             }
         }
@@ -56,9 +53,8 @@ public abstract class Grid extends Model {
 //        } else {
 //            // set the status of each cell to 0 (dead), i.e. initial value
 //        }
-        for(int row = 0; row < cells.length; row++) {
-            for (int col = 0; col < cells[row].length; col++) {
-                Cell cell = getCell(row, col);
+        for (Cell[] row : cells) {
+            for (Cell cell : row) {
                 cell.reset(randomly);
             }
         }
@@ -99,14 +95,17 @@ public abstract class Grid extends Model {
         int row = askerRow-radius;//starting row
         int col = askerCol-radius;//starting col
 
+        if (row < 0) row = 0;
+        if (col < 0) col = 0;
+
         while(row <= askerRow+radius){//ending row
             while(col <= askerCol+radius){//ending col
-                int r = (int) (row - dim*(Math.floor((double) row /(double)dim)));
-                int c = (int) (col - dim*(Math.floor((double) col /(double)dim)));
-                Cell cell = getCell(r,c);
-                col++;//increment col before the check
+
+                Cell cell = getCell(row%dim, col%dim);
                 if(cell.equals(asker)) continue;
                 set.add(cell);
+
+                col++;
             }
             row++;
         }
@@ -119,8 +118,8 @@ public abstract class Grid extends Model {
 
     public void observe() {
         // call each cell's observe method and notify subscribers
-        for(int row = 0; row < cells.length; row++) {
-            for (Cell cell : cells[row]) {
+        for (Cell[] row : cells) {
+            for (Cell cell : row) {
                 cell.observe();
                 cell.notifySubscribers();
             }
@@ -129,8 +128,8 @@ public abstract class Grid extends Model {
     }
 
     public void interact() {
-        for(int row = 0; row < cells.length; row++) {
-            for (Cell cell : cells[row]) {
+        for (Cell[] row : cells) {
+            for (Cell cell : row) {
                 cell.interact();
                 cell.notifySubscribers();
             }
@@ -139,8 +138,8 @@ public abstract class Grid extends Model {
     }
 
     public void update() {
-        for(int row = 0; row < cells.length; row++) {
-            for (Cell cell : cells[row]) {
+        for (Cell[] row : cells) {
+            for (Cell cell : row) {
                 cell.update();
                 cell.notifySubscribers();
             }
