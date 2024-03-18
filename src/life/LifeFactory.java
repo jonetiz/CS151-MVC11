@@ -7,7 +7,7 @@ public class LifeFactory extends GridFactory {
     public Model makeModel() { return new Society(); }
 
     public View makeView(Society model) {
-        return new LifeView(model);
+        return new GridView(model);
     }
 
     public String getTitle() { return "Life"; }

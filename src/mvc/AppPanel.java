@@ -32,8 +32,7 @@ public class AppPanel extends JPanel implements ActionListener {
         this.add(view);
         this.setLayout((new GridLayout(1, 2)));
 
-        frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame = new SafeFrame();
         Container cp = frame.getContentPane();
         cp.add(this);
         frame.setJMenuBar(this.createMenuBar());

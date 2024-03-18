@@ -97,18 +97,19 @@ public abstract class Grid extends Model {
 
         while(row <= askerRow+radius){//ending row
             while(col <= askerCol+radius){//ending col
-
                 int r = (int) (row - dim*(Math.floor((double) row /(double)dim)));
                 int c = (int) (col - dim*(Math.floor((double) col /(double)dim)));
                 Cell cell = getCell(r,c);
-                if(cell.equals(asker)) continue;
-                set.add(cell);
+
+                if(!cell.equals(asker)) set.add(cell);
 
                 col++;
             }
+            col = askerCol - radius;
             row++;
         }
 
+        System.out.println(set.size());
         return set;
     }
 
