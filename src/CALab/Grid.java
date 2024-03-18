@@ -1,8 +1,6 @@
 package CALab;
 
-import java.awt.*;
 import java.util.*;
-import java.io.*;
 
 import mvc.*;
 
@@ -56,9 +54,8 @@ public abstract class Grid extends Model {
 //        } else {
 //            // set the status of each cell to 0 (dead), i.e. initial value
 //        }
-        for(int row = 0; row < cells.length; row++) {
-            for (int col = 0; col < cells[row].length; col++) {
-                Cell cell = getCell(row, col);
+        for (Cell[] row : cells) {
+            for (Cell cell : row) {
                 cell.reset(randomly);
             }
         }
@@ -119,8 +116,8 @@ public abstract class Grid extends Model {
 
     public void observe() {
         // call each cell's observe method and notify subscribers
-        for(int row = 0; row < cells.length; row++) {
-            for (Cell cell : cells[row]) {
+        for (Cell[] row : cells) {
+            for (Cell cell : row) {
                 cell.observe();
                 cell.notifySubscribers();
             }
@@ -129,8 +126,8 @@ public abstract class Grid extends Model {
     }
 
     public void interact() {
-        for(int row = 0; row < cells.length; row++) {
-            for (Cell cell : cells[row]) {
+        for (Cell[] row : cells) {
+            for (Cell cell : row) {
                 cell.interact();
                 cell.notifySubscribers();
             }
@@ -139,8 +136,8 @@ public abstract class Grid extends Model {
     }
 
     public void update() {
-        for(int row = 0; row < cells.length; row++) {
-            for (Cell cell : cells[row]) {
+        for (Cell[] row : cells) {
+            for (Cell cell : row) {
                 cell.update();
                 cell.notifySubscribers();
             }

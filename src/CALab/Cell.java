@@ -9,7 +9,7 @@ import mvc.*;
 public abstract class Cell extends Publisher implements Serializable {
 
     protected int row = 0, col = 0;
-    protected Set<Cell> neighbors = new HashSet<Cell>();
+    protected Set<Cell> neighbors = new HashSet<>();
     protected Grid myGrid = null;
     protected Cell partner = null;
 
@@ -56,7 +56,7 @@ public abstract class Cell extends Publisher implements Serializable {
     public abstract void nextState();
 
     // set status to a random or initial value
-    public abstract void reset(boolean randomly);
+    public abstract void reset(boolean random);
 
     public abstract Color getColor();
 
