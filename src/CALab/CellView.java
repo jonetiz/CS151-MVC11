@@ -8,7 +8,7 @@ import mvc.*;
 
 
 public class CellView extends JButton implements ActionListener, Subscriber {
-    private Cell myCell;
+    public Cell myCell;
 
     public CellView(Cell c) {
         myCell = c;
