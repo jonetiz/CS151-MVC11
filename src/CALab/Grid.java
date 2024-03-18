@@ -95,13 +95,12 @@ public abstract class Grid extends Model {
         int row = askerRow-radius;//starting row
         int col = askerCol-radius;//starting col
 
-        if (row < 0) row = 0;
-        if (col < 0) col = 0;
-
         while(row <= askerRow+radius){//ending row
             while(col <= askerCol+radius){//ending col
 
-                Cell cell = getCell(row%dim, col%dim);
+                int r = (int) (row - dim*(Math.floor((double) row /(double)dim)));
+                int c = (int) (col - dim*(Math.floor((double) col /(double)dim)));
+                Cell cell = getCell(r,c);
                 if(cell.equals(asker)) continue;
                 set.add(cell);
 
