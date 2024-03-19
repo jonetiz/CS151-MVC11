@@ -4,7 +4,7 @@ import mvc.Command;
 import mvc.Model;
 
 public class RunCommand extends Command {
-    private int runCount;
+    private final int runCount;
     public RunCommand(Model model, int runCount) {
         super(model);
         this.runCount = runCount;

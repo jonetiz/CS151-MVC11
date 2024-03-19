@@ -21,13 +21,7 @@ public class Society extends Grid {
         death.add(8);
     }
 
-    public Agent makeCell(boolean uniform) {
-        for(int row = 0; row < dim; row++){
-            for(int col = 0; col < dim; col++){
-                Cell cell = new Agent(this, row, col);
-                cells[row][col] = cell;
-            }
-        }
-        return null;
+    public Agent makeCell() {
+        return new Agent(this);
     }
 }

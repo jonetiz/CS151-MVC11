@@ -1,16 +1,12 @@
 package life;
 
-import CALab.*;
+import CALab.GridFactory;
 import mvc.*;
 
 public class LifeFactory extends GridFactory {
     public Model makeModel() { return new Society(); }
 
-    public View makeView(Society model) {
-        return new GridView(model);
-    }
-
-    public String getTitle() { return "Life"; }
+    public String getTitle() { return "Life Lab"; }
 
     public String[] getHelp() {
         return super.getHelp();

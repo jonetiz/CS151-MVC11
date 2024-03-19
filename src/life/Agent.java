@@ -6,12 +6,10 @@ import java.awt.*;
 import java.util.Random;
 
 public class Agent extends Cell {
-    public int status = 0;
-    public int ambience = 0;
-    public Agent(Society society, int row, int col){
+    private int status = 0;
+    private int ambience = 0;
+    public Agent(Society society){
         myGrid = society;
-        this.row = row;
-        this.col = col;
     }
 
     public void observe() {
@@ -47,7 +45,9 @@ public class Agent extends Cell {
         } else {
             status = 0;
         }
-        observe();
+
+        notifySubscribers();
+//        System.out.printf("%s %s %s\n", status, ambience, getColor());
     }
 
     public void reset(boolean random) {
@@ -56,16 +56,13 @@ public class Agent extends Cell {
             int alive = r.nextInt(100);
             if (alive < Society.percentAlive) {
                 status = 1;
-                ambience = 3;
             } else {
                 status = 0;
-                ambience = 0;
             }
         } else {
             status = 0;
             ambience = 0;
         }
-        observe();
 
         notifySubscribers();
     }

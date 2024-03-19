@@ -13,16 +13,13 @@ public abstract class Grid extends Model {
         return dim;
     }
 
-    public int getTime() {
-        return time;
-    }
+    public int getTime() { return time; }
 
     public Cell getCell(int row, int col) {
         return cells[row][col];
     }
 
-    public abstract Cell makeCell(boolean uniform);
-
+    public abstract Cell makeCell();
 
     public Grid(int dim) {
         this.dim = dim;
@@ -36,8 +33,15 @@ public abstract class Grid extends Model {
 
     protected void populate() {
         // 1. use makeCell to fill in cells
+        for(int row = 0; row < dim; row++){
+            for(int col = 0; col < dim; col++){
+                Cell cell = makeCell();
+                cell.row = row;
+                cell.col = col;
+                cells[row][col] = cell;
+            }
+        }
         // 2. use getNeighbors to set the neighbors field of each cell
-        makeCell(true);
         for(Cell[] row : cells){
             for(Cell cell : row){
                 cell.neighbors = getNeighbors(cell, 1);
@@ -47,28 +51,13 @@ public abstract class Grid extends Model {
 
     // called when Populate and clear buttons are clicked
     public void repopulate(boolean randomly) {
-//        if (randomly) {
-//            // randomly set the status of each cell
-//        } else {
-//            // set the status of each cell to 0 (dead), i.e. initial value
-//        }
         for (Cell[] row : cells) {
             for (Cell cell : row) {
                 cell.reset(randomly);
             }
         }
+        observe(); // set the ambiences otherwise it will fill with 0 ambience everywhere
 
-        // notify subscribers
-        notifySubscribers();
-    }
-
-    public void clear() {
-        // set all back to default state
-        for (Cell[] row : cells) {
-            for (Cell cell : row) {
-                cell.reset(false);
-            }
-        }
         // notify subscribers
         notifySubscribers();
     }
@@ -82,14 +71,8 @@ public abstract class Grid extends Model {
         The asker is not a neighbor of itself.
         */
 
-        // if the radius is 1 we just need the neighbors
-        //if (radius == 1) return asker.neighbors;
         // this will be returned
         Set<Cell> set = new HashSet<>();
-        // recursively add all neighbors to set
-        //for (Cell neighbor : asker.neighbors) {
-            //set.addAll(getNeighbors(neighbor, radius - 1));
-        //}
         /*
                 +---+---+---+
                 | 1 | 2 | 3 |
