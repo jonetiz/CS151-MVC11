@@ -20,6 +20,7 @@ public class Agent extends Cell {
         for (Cell neighbor : neighbors) {
             ambience += ((Agent)neighbor).status;
         }
+
         notifySubscribers();
     }
 
@@ -55,13 +56,16 @@ public class Agent extends Cell {
             int alive = r.nextInt(100);
             if (alive < Society.percentAlive) {
                 status = 1;
+                ambience = 3;
             } else {
                 status = 0;
+                ambience = 0;
             }
         } else {
             status = 0;
             ambience = 0;
         }
+        observe();
 
         notifySubscribers();
     }

@@ -120,7 +120,6 @@ public abstract class Grid extends Model {
             row++;
         }
 
-        System.out.println(set.size());
         return set;
     }
 

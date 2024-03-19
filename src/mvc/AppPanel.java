@@ -10,10 +10,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 
 public class AppPanel extends JPanel implements ActionListener {
     protected View view;
@@ -37,7 +33,7 @@ public class AppPanel extends JPanel implements ActionListener {
         cp.add(this);
         frame.setJMenuBar(this.createMenuBar());
         frame.setTitle(factory.getTitle());
-        frame.setSize(500, 300);
+        frame.setSize(1200, 800);
     }
 
     protected JMenuBar createMenuBar() {
@@ -63,42 +59,16 @@ public class AppPanel extends JPanel implements ActionListener {
         System.out.println(cmmd);
         try {
             switch (cmmd) {
-                case "Save": {
-                    Utilities.save(model, true);
-                    break;
-                }
-
-                case "Open": {
-                    Utilities.open(model);
-                    break;
-
-                }
-
-                case "New": {
+                case "Save" -> Utilities.save(model, true);
+                case "Open" -> Utilities.open(model);
+                case "New" -> {
                     model = factory.makeModel();
                     view.setModel(model);
-                    break;
                 }
-
-                case "Quit": {
-                    System.exit(0);
-                    break;
-                }
-
-                case "About": {
-                    Utilities.inform(factory.about());
-                    break;
-                }
-
-                case "Help": {
-                    Utilities.inform(factory.getHelp());
-                    break;
-
-                }
-
-                default: {
-                    factory.makeEditCommand(model, cmmd, this).execute();
-                }
+                case "Quit" -> System.exit(0);
+                case "About" -> Utilities.inform(factory.about());
+                case "Help" -> Utilities.inform(factory.getHelp());
+                default -> factory.makeEditCommand(model, cmmd, this).execute();
             }
         } catch (Exception ex) {
             Utilities.error(ex);
