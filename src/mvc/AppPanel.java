@@ -60,11 +60,21 @@ public class AppPanel extends JPanel implements ActionListener {
         try {
             switch (cmmd) {
                 case "Save" -> {
-                    System.out.println(model);
-                    Utilities.save(model, true);}
+                    try {
+                        Utilities.save(model, true);
+                    } catch (Exception ex) {
+                        Utilities.inform("ERROR: Failed to save file.");
+                    }
+                }
                 case "Open" -> {
-                    model = Utilities.open(model);
-                    view.setModel(model);
+                    try {
+                        model = Utilities.open(model);
+                        if (model != null) {
+                            view.setModel(model);
+                        }
+                    } catch (Exception ex) {
+                        Utilities.inform("ERROR: Didn't load any file, potentially due to an error.");
+                    }
                 }
                 case "New" -> {
                     model = factory.makeModel();
