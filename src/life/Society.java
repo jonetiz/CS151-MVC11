@@ -2,10 +2,11 @@ package life;
 
 import CALab.*;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Society extends Grid {
+public class Society extends Grid implements Serializable {
     public static int percentAlive = 50;
     public static Set<Integer> rebirth = new HashSet<>();
     public static Set<Integer> death = new HashSet<>();
