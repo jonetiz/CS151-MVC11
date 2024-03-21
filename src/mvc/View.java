@@ -24,14 +24,10 @@ public class View extends JPanel implements Subscriber {
         repaint();
     }
 
-    public void setModel(Model model){
-        this.model.unsubscribe(this);
-        this.model = model;
+    public void setModel(Model newModel){
+        model.unsubscribe(this);
+        model = newModel;
         model.subscribe(this);
-        repaint();
-    }
-
-    public void paintComponent(Graphics gc) {
-
+        update();
     }
 }

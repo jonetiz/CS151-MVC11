@@ -59,8 +59,13 @@ public class AppPanel extends JPanel implements ActionListener {
         System.out.println(cmmd);
         try {
             switch (cmmd) {
-                case "Save" -> Utilities.save(model, true);
-                case "Open" -> Utilities.open(model);
+                case "Save" -> {
+                    System.out.println(model);
+                    Utilities.save(model, true);}
+                case "Open" -> {
+                    model = Utilities.open(model);
+                    view.setModel(model);
+                }
                 case "New" -> {
                     model = factory.makeModel();
                     view.setModel(model);

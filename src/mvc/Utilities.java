@@ -84,11 +84,11 @@ public class Utilities {
     // save model
     public static void save(Model model, Boolean saveAs) {
         String fName = model.getFileName();
-        System.out.println(fName);
         if (fName == null || saveAs) {
             fName = getFileName(fName, false);
             model.setFileName(fName);
         }
+        System.out.println(fName);
         try {
             ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(fName));
             model.setUnsavedChanges(false);
@@ -104,6 +104,7 @@ public class Utilities {
     public static Model open(Model model) {
         saveChanges(model);
         String fName = getFileName(model.getFileName(), true);
+        System.out.println(fName);
         Model newModel = null;
         try {
             ObjectInputStream is = new ObjectInputStream(new FileInputStream(fName));
